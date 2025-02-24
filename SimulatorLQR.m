@@ -14,7 +14,7 @@ x0=[0.1 0 0 0 0].';
 T=2; % Time duration of the simulation 
 % sim("SimulatorLQRmodel",T); 
 
-gg=plot(out.Time,out.y); 
+gg=plot(out.t,out.y); 
 set(gg,"LineWidth",1.5) 
 
 gg=xlabel("Time (s9"); 
