@@ -5,18 +5,15 @@ close all
 load("matfiles\IP_MODEL.mat")
 
 %% Controller tuning
-% State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
 Qr = diag([10,0,1,0,0]); %Weight Matrix for x 
 
-Rr = 1; %Weight for the input variable (Motor voltage)
+Rr = 1; %Weight for the input variable 
 
 K = lqr(A, B, Qr, Rr); %Calculate feedback gain 
 
-%% Simulation parameters 
+%% Simulation controller 
 x0=[0.3 0 0.1 0 0].'; 
 % D=[0 0 0 0 0].'; % For identity matrix 
-
-% Noise
 use_output_noise = 1;
 use_input_noise = 1;
 
