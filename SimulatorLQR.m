@@ -8,24 +8,24 @@ load("matfiles\IP_MODEL.mat")
 % State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
 Qr = diag([10,0,1,0,0]); %Weight Matrix for x 
 
-Rr = 10; %Weight for the input variable (Motor voltage) 
+Rr = 0.1; %Weight for the input variable (Motor voltage) 
 % Lower bound = 0.01
 % Upper bound = 10 (it doesnt change anymore)
 
 K = lqr(A, B, Qr, Rr); %Calculate feedback gain 
 
 %% Simulation parameters 
-x0=[0.3 0 0.1 0 0].'; 
+x0=[pi/2 0 0.1 0 0].'; 
 % D=[0 0 0 0 0].'; % For identity matrix 
 
 % Noise
-use_output_noise = 0;
+use_output_noise = 1;
 output_noise_power = 10;
 
-use_input_noise = 0;
+use_input_noise = 1;
 input_noise_power = 10;
 
-T=2; % Time duration of the simulation 
+T=5; % Time duration of the simulation 
 out = sim("SimulatorLQRmodel",T);
 
 gg=plot(out.t,out.y); 
