@@ -31,6 +31,9 @@ out = sim("SimulatorLQRmodel",T);
 gg=plot(out.t,out.y); 
 set(gg,"LineWidth",1.5) 
 
+title("Output behavior")
+yline(0,'-')
+
 gg=xlabel("Time (s9"); 
 set(gg,"Fontsize",14); 
 
@@ -42,7 +45,8 @@ legend("alpha(x)","beta(z)")
 
 figure
 plot(out.t,out.u,out.t,out.u_sat,"LineWidth",1.5)
-% plot(out.t,out.u_sat,"LineWidth",1.5)
+yline(0,'-')
+title("Input behavior")
 xlabel("Time","Fontsize",14)
 ylabel("Input(Volts)","Fontsize",14)
 legend

@@ -18,13 +18,10 @@ K = lqr(A, B, Qr, Rr); %Calculate feedback gain
 G = eye(size(A)); %Gain of the process noise 
 
 % State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
-we = 10;
-rv = 1;
-
-Qe = we*diag([1,1,1,1,1]); %Variance of process errors
+Qe = diag([10,10,10,1,10]); %Variance of process errors
 
 % Output= [alpha(x), Beta(z)]
-Re = rv*diag([1,1]); %Variance of measurement errors 
+Re = diag([10,10]); %Variance of measurement errors 
 
 L = lqe(A, G, C, Qe, Re); %Calculate estimator gains
 
@@ -38,7 +35,7 @@ use_output_noise = 1;
 output_noise_power = 10;
 
 use_input_noise = 0;
-input_noise_power = 1;
+input_noise_power = 10;
 
 T=5; % Time duration of the simulation 
 out = sim("SimulatorLQGmodel",T);
@@ -47,7 +44,6 @@ gg=plot(out.t,out.y);
 set(gg,"LineWidth",1.5) 
 
 title("Output behavior")
-yline(0,'-')
 
 gg=xlabel("Time (s9"); 
 set(gg,"Fontsize",14); 
@@ -60,7 +56,6 @@ legend("alpha(x)","beta(z)")
 
 figure
 plot(out.t,out.u,out.t,out.u_sat,"LineWidth",1.5)
-yline(0,'-')
 title("Input behavior")
 xlabel("Time","Fontsize",14)
 ylabel("Input(Volts)","Fontsize",14)
@@ -69,8 +64,7 @@ legend("Controller u","Saturated u")
 
 figure
 plot(out.t,out.x,out.t,out.x_estimated,"LineWidth",1.5)
-yline(0,'-')
 title("Estimation comparison")
 xlabel("Time","Fontsize",14)
 ylabel("States comparison","Fontsize",14)
-
+legend
