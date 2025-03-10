@@ -6,9 +6,11 @@ load("matfiles\IP_MODEL.mat")
 
 %% Controller tuning
 % State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
-Qr = diag([10,0,1,0,0]); %Weight Matrix for x 
+Qr = diag([10,0,1,0,0]); %Weight Matrix for x
+%Qr = diag([100,1,100,10,0.1]); %Weight Matrix for x
 
-Rr = 0.1; %Weight for the input variable (Motor voltage) 
+%Rr = 0.1; %Weight for the input variable (Motor voltage)
+Rr = 0.1; %Weight for the input variable (Motor voltage)
 % Lower bound = 0.01
 % Upper bound = 10 (it doesnt change anymore)
 
