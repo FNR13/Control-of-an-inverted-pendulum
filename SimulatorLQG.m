@@ -51,7 +51,7 @@ else
     deadzone_higher = 0;
 end
 
-deadzone_parameters = [deadzone_higher, use_deadzone_compensation];
+deadzone_parameters = [deadzone_lower,deadzone_higher, use_deadzone_compensation];
 
 T=30; % Time duration of the simulation 
 out = sim('SimulatorLQGmodel',T);
