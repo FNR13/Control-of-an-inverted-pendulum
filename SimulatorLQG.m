@@ -6,9 +6,9 @@ load('matfiles\IP_MODEL.mat')
 %% Controller tuning
 %  LQR gains
 % State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
-Qr = diag([10, 1, 10, 1, 0]); %Weight Matrix for x
+Qr = diag([10, 0, 1, 0, 0]); %Weight Matrix for x
 
-Rr = 0.005; %Weight for the input variable (Motor voltage) 
+Rr = 1; %Weight for the input variable (Motor voltage) 
 % Lower bound = 0.01
 % Upper bound = 10 (it doesnt change anymore)
 
@@ -40,8 +40,8 @@ output_noise_power = 10;
 use_input_noise = 0;
 input_noise_power = 1;
 
-use_deadzone = 0;
-use_deadzone_compensation = 1;
+use_deadzone = 1;
+use_deadzone_compensation = 0;
 
 if use_deadzone
     deadzone_lower = -0.38;
@@ -88,3 +88,12 @@ title('Estimation comparison')
 xlabel('Time','Fontsize',14)
 ylabel('States comparison','Fontsize',14)
 
+%% Error 
+t_steady = out.t > 5; 
+error = out.y(t_steady,:);
+
+RMSE = sqrt(sum(error.^2)/size(error,1))
+
+action = out.u_sat(t_steady,:);
+
+RMSE_action = sqrt(sum(action.^2)/size(action,1))

@@ -21,7 +21,11 @@ fprintf('Observability matrix for case 2 (C = [1 0 0 0 0; 0 0 1 0 0]): %f \n',ra
 
 % Question 4
 sys = ss(A,B,C,D);
-bode(sys)
+options = bodeoptions;
+options.FreqUnits = 'Hz';
+figure(1)
+bode(sys,options);
+
 % sys = ss(A,B,C1,0);
 % rlocus(sys)
 % [num, den] = ss2tf(A,B,C,D);

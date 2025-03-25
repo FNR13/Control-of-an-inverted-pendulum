@@ -27,7 +27,7 @@ use_input_noise = 0;
 input_noise_power = 10;
 
 % Deadzone
-use_deadzone = 1;
+use_deadzone = 0;
 use_deadzone_compensation = 1;
 
 if use_deadzone
@@ -43,7 +43,6 @@ deadzone_parameters = [deadzone_lower,deadzone_higher, use_deadzone_compensation
 T=10; % Time duration of the simulation 
 out = sim("SimulatorLQRmodel",T);
 
-%% Plotting
 gg=plot(out.t,out.y); 
 set(gg,"LineWidth",1.5) 
 
@@ -72,8 +71,7 @@ legend("Controller u","Saturated u")
 t_steady = out.t > 5; 
 error = out.y(t_steady,:);
 
-RMSE = sqrt(sum(error.^2)/size(error,1))
+RMSE = sqrt(sum(error.^2)/size(error,1));
 
 action = out.u_sat(t_steady,:);
-
-RMSE_action = sqrt(sum(action.^2)/size(action,1))
+Action = 
