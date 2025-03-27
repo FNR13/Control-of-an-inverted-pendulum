@@ -6,9 +6,9 @@ load('matfiles\IP_MODEL.mat')
 %% Controller tuning
 %  LQR gains
 % State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
-Qr = diag([10, 0, 1, 0, 0]); %Weight Matrix for x
+Qr = diag([100, 1, 10, 1, 0]); %Weight Matrix for x
 
-Rr = 1; %Weight for the input variable (Motor voltage) 
+Rr = 10; %Weight for the input variable (Motor voltage) 
 % Lower bound = 0.01
 % Upper bound = 10 (it doesnt change anymore)
 
@@ -24,13 +24,13 @@ rv = 1;
 Qe = we*diag([1,1,1,1,1]); %Variance of process errors
 
 % Output= [alpha(x), Beta(z)]
-Re = rv*diag([1,1]); %Variance of measurement errors 
+Re = rv*diag([10,1]); %Variance of measurement errors 
 
 L = lqe(A, G, C, Qe, Re); %Calculate estimator gains
 
 %---------------------------------------------------------------------- 
 %% Simulation parameters 
-x0=[0.1 0 0 0 0].'; 
+x0=[0.2 0 0 0 0].'; 
 D_O= zeros(1,2); % For identity matrix 
 
 % Noise
@@ -41,7 +41,7 @@ use_input_noise = 0;
 input_noise_power = 1;
 
 use_deadzone = 1;
-use_deadzone_compensation = 0;
+use_deadzone_compensation = 1;
 
 if use_deadzone
     deadzone_lower = -0.38;
@@ -53,7 +53,7 @@ end
 
 deadzone_parameters = [deadzone_lower,deadzone_higher, use_deadzone_compensation];
 
-T=30; % Time duration of the simulation 
+T=10; % Time duration of the simulation 
 out = sim('SimulatorLQGmodel',T);
 
 gg=plot(out.t,out.y); 
