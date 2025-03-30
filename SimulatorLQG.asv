@@ -53,7 +53,7 @@ end
 
 deadzone_parameters = [deadzone_lower,deadzone_higher, use_deadzone_compensation];
 
-T=100; % Time duration of the simulation 
+T=10; % Time duration of the simulation 
 out = sim('SimulatorLQGmodel',T);
 
 y_degrees = rad2deg(out.y);
@@ -91,7 +91,7 @@ ylabel('States comparison','Fontsize',14)
 
 %% Error 
 t_steady = out.t > 5; 
-error = y_degrees(t_steady,:);
+error = out.y(t_steady,:);
 
 RMSE = sqrt(sum(error.^2)/size(error,1))
 
