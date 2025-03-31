@@ -1,6 +1,0 @@
-- equilibrio
-- velocidade de convergencia
-- Resistencia a pertubacoes
-- potencia gasta
-
-falta brincar com os qs
