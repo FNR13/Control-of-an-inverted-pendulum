@@ -6,9 +6,9 @@ load('matfiles\IP_MODEL.mat')
 %% Controller tuning
 %  LQR gains
 % State = [alpha(x), alpha rate, Beta(z), Beta rate, motor current]
-Qr = diag([100, 1, 10, 1, 0]); %Weight Matrix for x
+Qr = diag([10, 1, 10, 1, 0]); %Weight Matrix for x
 
-Rr = 10; %Weight for the input variable (Motor voltage) 
+Rr = 0.1; %Weight for the input variable (Motor voltage) 
 % Lower bound = 0.01
 % Upper bound = 10 (it doesnt change anymore)
 
@@ -30,20 +30,20 @@ L = lqe(A, G, C, Qe, Re); %Calculate estimator gains
 
 %---------------------------------------------------------------------- 
 %% Simulation parameters 
-alpha = 30;
-beta = 10;
+alpha = 20;
+beta = 0;
 x0=[deg2rad(alpha) 0 deg2rad(beta) 0 0].'; 
 D_O= zeros(1,2); % For identity matrix 
 
 % Noise
-use_output_noise = 1;
-output_noise_power = 10;
+use_output_noise = 0;
+output_noise_power = 1;
 
-use_input_noise = 1;
-input_noise_power = 1;
+use_input_noise = 0;
+input_noise_power = 0.1;
 
 use_deadzone = 1;
-use_deadzone_compensation = 1;
+use_deadzone_compensation = 0;
 
 if use_deadzone
     deadzone_lower = -0.38;
