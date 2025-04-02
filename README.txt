@@ -1,11 +1,3 @@
-﻿CMNLO 2024/2025 - Inverted pendulum 
-===================================
+﻿# **Control of an Inverted Pendulum**  
 
-1 - State model saved in "IP_MODEL.mat" (loaded in the next step);
-
-2 - Run "IP_MACRO.m";
-
-3 - Open and run "IP_TEST_MIO16E4_2015a.slx" or "IP_TEST_PCI6221_2015a.slx", accordingly;
-
-4 - Open and run "IP_MIO16E4_2015a.slx" or "IP_LQG_PCI6221_2015a.slx", accordingly.
-
+Control of a real inverted pendulum and its simulation implementation during the Multivariable, Nonlinear, and Optimal Control course.  
